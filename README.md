@@ -1,7 +1,6 @@
 # Portfolio
 
-Single-page portfolio site for a Data Science / ML Engineer. Next.js (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion, exported as a fully static site.
-
+Single-page portfolio site for a Data Science / ML Engineer. Next.js (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion, exported as a fully static site. Link - https://vineet5-data.github.io/Portfolio/
 ## Run locally
 
 ```bash
