@@ -121,9 +121,10 @@ export const projects: Project[] = [
   {
     title: "KD-tree recommendation system",
     description:
-      "Nearest-neighbour recommendations served in production — KD-tree backend deployed on AWS, integrated with an AR/VR app via Firebase.",
-    tags: ["AWS", "Firebase", "AR/VR", "Python"],
+      "My bachelor thesis: a KD-tree nearest-neighbour engine that recommends tiles from user preferences — Python service hosted on AWS, feeding an AR/VR showroom app through Firebase, with user feedback looped back into the suggestions.",
+    tags: ["Bachelor Thesis", "AWS", "Firebase", "AR/VR", "Python"],
     link: "https://github.com/Vineet5-Data",
+    report: `${BASE}/reports/kdtree-bachelor-thesis.pdf`,
   },
   {
     title: "Causal tree extension",
