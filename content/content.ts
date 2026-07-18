@@ -39,7 +39,7 @@ export const site = {
   email: "vineetdairashri5@gmail.com",
   github: "https://github.com/Vineet5-Data",
   linkedin: "https://www.linkedin.com/in/vineet-dairashri",
-  resumeHref: "/resume.pdf",
+  resumeHref: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/resume.pdf`,
 };
 
 export const sections = [

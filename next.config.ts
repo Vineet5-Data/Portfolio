@@ -5,9 +5,14 @@ import type { NextConfig } from "next";
 // Vercel and local dev serve from /.
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
 
+const basePath = isGitHubPages ? "/Portfolio" : "";
+
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: isGitHubPages ? "/Portfolio" : "",
+  basePath,
+  // exposed so plain <a href> assets (resume.pdf) get the basePath too —
+  // Next only rewrites next/link and _next assets, not raw anchors
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
   images: { unoptimized: true },
 };
 
