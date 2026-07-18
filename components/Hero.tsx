@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { site } from "@/content/content";
+import Magnetic from "./Magnetic";
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -52,19 +53,23 @@ export default function Hero() {
           {site.tagline}
         </motion.p>
         <motion.div {...fadeUp(0.24)} className="mt-10 flex flex-wrap gap-3">
-          <a
-            href="#projects"
-            className="flex items-center gap-2 rounded-full bg-fg px-6 py-3 text-sm font-medium text-bg transition-transform hover:-translate-y-0.5"
-          >
-            View Projects
-            <ArrowRight size={16} />
-          </a>
-          <a
-            href="#contact"
-            className="flex items-center rounded-full border border-line px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-          >
-            Contact Me
-          </a>
+          <Magnetic>
+            <a
+              href="#projects"
+              className="flex items-center gap-2 rounded-full bg-fg px-6 py-3 text-sm font-medium text-bg"
+            >
+              View Projects
+              <ArrowRight size={16} />
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href="#contact"
+              className="flex items-center rounded-full border border-line px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+            >
+              Contact Me
+            </a>
+          </Magnetic>
         </motion.div>
       </div>
     </section>

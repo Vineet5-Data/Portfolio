@@ -32,8 +32,13 @@ export default function Contact() {
                 <span className="text-lg font-medium sm:text-xl">{r.label}</span>
               </span>
               <span className="flex items-center gap-2 text-sm text-muted sm:text-base">
-                {r.value}
-                <ArrowUpRight size={16} />
+                <span className="transition-transform duration-300 group-hover:-translate-x-1">
+                  {r.value}
+                </span>
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
               </span>
             </a>
           </Reveal>

@@ -151,6 +151,103 @@ body {
   );
 }
 
+/* ---- custom cursor (html gets .has-cursor on fine pointers only) ---- */
+.cursor-dot,
+.cursor-ring {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  will-change: transform;
+}
+
+html.has-cursor .cursor-dot,
+html.has-cursor .cursor-ring {
+  display: flex;
+}
+
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button {
+  cursor: none;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+  background: var(--accent);
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--fg) 45%, transparent);
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.cursor-ring span {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--bg);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cursor-ring[data-state="view"] {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--accent) 85%, var(--fg));
+}
+
+.cursor-ring[data-state="view"] span {
+  opacity: 1;
+}
+
+/* ---- cursor-tracked spotlight inside cards (uses --mx / --my) ---- */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    300px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 10%, transparent),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* ---- nav link underline slides in from the left ---- */
+.nav-link {
+  background: linear-gradient(currentColor, currentColor) no-repeat left 100% /
+    0 1px;
+  padding-bottom: 2px;
+  transition: background-size 0.3s ease, color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link[data-active="true"] {
+  background-size: 100% 1px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -160,5 +257,17 @@ body {
   .orb-c,
   .marquee-track {
     animation: none;
+  }
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+  html.has-cursor,
+  html.has-cursor a,
+  html.has-cursor button {
+    cursor: auto;
+  }
+  .spotlight::before {
+    display: none;
   }
 }

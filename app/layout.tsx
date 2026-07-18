@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/content";
+import Cursor from "@/components/Cursor";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
+        <Cursor />
         {children}
       </body>
     </html>

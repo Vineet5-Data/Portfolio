@@ -35,7 +35,7 @@ export default function Skills() {
               {g.items.map((item) => (
                 <li
                   key={item}
-                  className="rounded-full border border-line px-3 py-1.5 text-sm"
+                  className="rounded-full border border-line px-3 py-1.5 text-sm transition-[transform,border-color,color] duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent"
                 >
                   {item}
                 </li>

@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUpRight, FileText, Plus } from "lucide-react";
 import type { Project } from "@/content/content";
 
@@ -13,7 +15,15 @@ export default function ProjectCard({ project }: { project: Project }) {
   }
 
   return (
-    <div className="group relative flex min-h-[220px] flex-col rounded-xl border border-line bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg hover:shadow-black/10 dark:hover:shadow-black/40">
+    <div
+      data-cursor="view"
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+      }}
+      className="spotlight group relative flex min-h-[220px] flex-col rounded-xl border border-line bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg hover:shadow-black/10 dark:hover:shadow-black/40"
+    >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-base font-semibold tracking-tight sm:text-lg">
           <a

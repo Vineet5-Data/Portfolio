@@ -47,7 +47,8 @@ export default function Nav() {
             <li key={s.id}>
               <a
                 href={`#${s.id}`}
-                className={`text-sm transition-colors hover:text-fg ${
+                data-active={active === s.id}
+                className={`nav-link text-sm transition-colors hover:text-fg ${
                   active === s.id ? "text-fg" : "text-muted"
                 }`}
               >
