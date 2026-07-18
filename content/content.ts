@@ -35,7 +35,7 @@ export const site = {
   title: "Data Scientist & ML Engineer",
   headline: "Building AI systems for autonomous navigation.",
   tagline:
-    "I'm currently writing my master's thesis with BMW Group on AI-driven map matching and path prediction, combining transformer and GNN architectures with reinforcement learning. Before that: bird song classifiers, cosmological inference, and recommendation systems in production.",
+    "I'm building AI-driven map matching and path prediction as a personal research project, combining transformer and GNN architectures with reinforcement learning. Before that: bird song classifiers, cosmological inference, and recommendation systems in production.",
   email: "vineetdairashri5@gmail.com",
   github: "https://github.com/Vineet5-Data",
   linkedin: "https://www.linkedin.com/in/vineet-dairashri",
@@ -53,7 +53,7 @@ export const sections = [
 export const about = {
   paragraphs: [
     "I'm an MSc Data Science student at TU Dortmund and a research assistant, with a background in Engineering Informatics. My work sits where ML research meets applied engineering: I like taking an idea from a paper and turning it into a system that runs on real, messy data.",
-    "Right now that means my thesis with BMW — teaching models to understand where a vehicle is and where it's going, without hand-labeled data. Outside of that I've worked on audio classification, simulation-based inference for cosmology, and recommendation systems deployed to production.",
+    "Right now that means my main personal project — teaching models to understand where a vehicle is and where it's going, without hand-labeled data. Outside of that I've worked on audio classification, simulation-based inference for cosmology, and recommendation systems deployed to production.",
   ],
 };
 
@@ -65,9 +65,9 @@ export const stats: Stat[] = [
 
 export const experience: ExperienceEntry[] = [
   {
-    role: "Master's Thesis — AI-Driven Map Matching & Path Prediction",
-    org: "BMW Group, A-PO Foresight",
-    location: "Ulm, Germany",
+    role: "Independent Research — AI-Driven Map Matching & Path Prediction",
+    org: "Personal project",
+    location: "",
     period: "2025 — present",
     summary:
       "Transformer and GNN architectures with latent-space reinforcement learning for map matching and path prediction, trained label-free on raw GPS fleet data.",
