@@ -1,27 +1,40 @@
 "use client";
 
+import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { site } from "@/content/content";
 
 export default function Hero() {
   const reduce = useReducedMotion();
+  const glowRef = useRef<HTMLDivElement>(null);
   const fadeUp = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.7, delay, ease: "easeOut" as const },
   });
 
+  function onMouseMove(e: React.MouseEvent<HTMLElement>) {
+    if (reduce || !glowRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    glowRef.current.style.transform = `translate(${e.clientX - rect.left}px, ${
+      e.clientY - rect.top
+    }px)`;
+  }
+
   return (
     <section
       id="top"
-      className="relative flex min-h-screen items-center overflow-hidden"
+      onMouseMove={onMouseMove}
+      className="hero-zone relative flex min-h-screen items-center overflow-hidden"
     >
-      {/* drifting gradient orbs, CSS-only */}
+      {/* drifting gradient orbs + dot grid + cursor glow, all GPU-cheap */}
       <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="dot-grid absolute inset-0 opacity-60" />
         <div className="orb orb-a left-[10%] top-[15%] h-[420px] w-[420px] bg-accent/60" />
         <div className="orb orb-b right-[5%] top-[30%] h-[380px] w-[380px] bg-emerald-300/40 dark:bg-emerald-700/40" />
         <div className="orb orb-c bottom-[5%] left-[35%] h-[340px] w-[340px] bg-teal-400/30" />
+        {!reduce && <div ref={glowRef} className="cursor-glow hidden md:block" />}
       </div>
 
       <div className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6">

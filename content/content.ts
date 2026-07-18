@@ -6,8 +6,12 @@ export type Project = {
   description: string;
   tags: string[];
   link?: string;
+  report?: string;
   placeholder?: boolean;
 };
+
+// static-export inlines this at build time; needed on every plain <a> asset href
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export type ExperienceEntry = {
   role: string;
@@ -39,7 +43,7 @@ export const site = {
   email: "vineetdairashri5@gmail.com",
   github: "https://github.com/Vineet5-Data",
   linkedin: "https://www.linkedin.com/in/vineet-dairashri",
-  resumeHref: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/resume.pdf`,
+  resumeHref: `${BASE}/resume.pdf`,
 };
 
 export const sections = [
@@ -94,7 +98,7 @@ export const projects: Project[] = [
   {
     title: "AI-driven map matching & path prediction",
     description:
-      "Predicts where a vehicle is on the road network and where it's headed — transformer/GNN models with latent-space RL, trained label-free on raw GPS fleet data (T-Drive, Porto Taxi, Grab-Posisi-L, OSMnx road networks).",
+      "A two-stage system for vehicles: first snapping noisy GPS traces onto the road graph, then predicting the road segments ahead. Transformer and GNN encoders over OSMnx road networks with latent-space reinforcement learning, trained label-free on raw fleet data (T-Drive, Porto Taxi, Grab-Posisi-L) and evaluated on road-level Hit@1.",
     tags: ["Transformers", "GNN", "RL", "OSMnx", "PyTorch"],
     link: "https://github.com/Vineet5-Data",
   },
@@ -104,13 +108,15 @@ export const projects: Project[] = [
       "Identifies bird species from field recordings — a ConvNeXT-based audio model reaching 0.880 AUC-ROC on multi-label soundscapes.",
     tags: ["ConvNeXT", "Audio ML", "PyTorch", "Kaggle"],
     link: "https://github.com/Vineet5-Data",
+    report: `${BASE}/reports/bird-classification-case-study.pdf`,
   },
   {
     title: "Cosmological parameter inference",
     description:
-      "Estimates the parameters that shape the universe from simulations — Simulation-Based Inference with amortized Bayesian methods.",
-    tags: ["SBI", "Bayesian Inference", "Deep Learning"],
+      "Estimates the parameters that shape the universe — H₀, Ωₘ, nₛ — from the galaxy power spectrum, using amortized neural posterior estimation with BayesFlow.",
+    tags: ["SBI", "BayesFlow", "Bayesian Inference", "Deep Learning"],
     link: "https://github.com/Vineet5-Data",
+    report: `${BASE}/reports/sbi-cosmology-report.pdf`,
   },
   {
     title: "KD-tree recommendation system",

@@ -45,6 +45,40 @@ body {
   opacity: 0.35;
   will-change: transform;
   pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+
+/* orbs brighten while the pointer is inside the hero */
+.hero-zone:hover .orb {
+  opacity: 0.55;
+}
+
+/* faint dot-grid backdrop, fades out toward the edges */
+.dot-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--fg) 14%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black, transparent 78%);
+}
+
+/* cursor-following glow inside the hero (moved via JS transform) */
+.cursor-glow {
+  position: absolute;
+  top: -160px;
+  left: -160px;
+  width: 320px;
+  height: 320px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+  will-change: transform;
 }
 
 @keyframes drift-a {
