@@ -87,7 +87,7 @@ export default function Nav() {
           <a
             href={site.resumeHref}
             download
-            className="ml-2 hidden items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent sm:flex"
+            className="btn-fill ml-2 hidden items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium transition-colors sm:flex"
           >
             <Download size={14} />
             Resume

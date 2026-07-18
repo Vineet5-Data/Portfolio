@@ -1,9 +1,11 @@
 "use client";
 
 import { ArrowUpRight, FileText, Plus } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 import type { Project } from "@/content/content";
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const reduce = useReducedMotion();
   if (project.placeholder) {
     return (
       <div className="flex min-h-[220px] flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-line p-6 text-muted">
@@ -18,11 +20,27 @@ export default function ProjectCard({ project }: { project: Project }) {
     <div
       data-cursor="view"
       onMouseMove={(e) => {
-        const r = e.currentTarget.getBoundingClientRect();
-        e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
-        e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+        const el = e.currentTarget;
+        const r = el.getBoundingClientRect();
+        const px = e.clientX - r.left;
+        const py = e.clientY - r.top;
+        el.style.setProperty("--mx", `${px}px`);
+        el.style.setProperty("--my", `${py}px`);
+        if (reduce) return;
+        // 3D tilt toward the cursor, max ~6deg
+        const rx = (py / r.height - 0.5) * -6;
+        const ry = (px / r.width - 0.5) * 6;
+        el.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
       }}
-      className="spotlight group relative flex min-h-[220px] flex-col rounded-xl border border-line bg-card p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg hover:shadow-black/10 dark:hover:shadow-black/40"
+      onMouseLeave={(e) => {
+        const el = e.currentTarget;
+        el.style.transition = "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)";
+        el.style.transform = "";
+        window.setTimeout(() => {
+          el.style.transition = "";
+        }, 500);
+      }}
+      className="spotlight group relative flex min-h-[220px] flex-col rounded-xl border border-line bg-card p-6 transition-[box-shadow,border-color] duration-300 hover:border-accent/50 hover:shadow-lg hover:shadow-black/10 dark:hover:shadow-black/40"
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-base font-semibold tracking-tight sm:text-lg">

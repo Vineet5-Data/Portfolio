@@ -28,10 +28,6 @@
   --color-accent: var(--accent);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background: var(--bg);
   color: var(--fg);
@@ -272,6 +268,32 @@ html.has-cursor button {
   opacity: 1;
 }
 
+/* ---- accent fill swipes up inside buttons on hover ---- */
+.btn-fill {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.btn-fill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  transform: translateY(101%);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-fill:hover::before {
+  transform: translateY(0);
+}
+
+.btn-fill:hover {
+  color: #ffffff;
+  border-color: transparent;
+}
+
 /* ---- nav link underline slides in from the left ---- */
 .nav-link {
   background: linear-gradient(currentColor, currentColor) no-repeat left 100% /
@@ -286,9 +308,6 @@ html.has-cursor button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   .orb-a,
   .orb-b,
   .orb-c,
@@ -308,7 +327,8 @@ html.has-cursor button {
     display: none;
   }
   .sun-wrap,
-  .sun {
+  .sun,
+  .btn-fill::before {
     transition: none;
   }
   .hero-zone:hover .sun {

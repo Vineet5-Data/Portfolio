@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { site } from "@/content/content";
 import Magnetic from "./Magnetic";
@@ -10,6 +15,9 @@ export default function Hero() {
   const reduce = useReducedMotion();
   const glowRef = useRef<HTMLDivElement>(null);
   const sunRef = useRef<HTMLDivElement>(null);
+  // background drifts slower than content while scrolling away from the hero
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 900], [0, 180]);
   const fadeUp = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -41,7 +49,11 @@ export default function Hero() {
       className="hero-zone relative flex min-h-screen items-center overflow-hidden"
     >
       {/* drifting gradient orbs + dot grid + cursor glow, all GPU-cheap */}
-      <div aria-hidden className="absolute inset-0 -z-10">
+      <motion.div
+        aria-hidden
+        style={reduce ? undefined : { y: bgY }}
+        className="absolute inset-0 -z-10"
+      >
         <div className="dot-grid absolute inset-0 opacity-60" />
         <div className="orb orb-a left-[10%] top-[15%] h-[420px] w-[420px] bg-accent/60" />
         <div className="orb orb-b right-[5%] top-[30%] h-[380px] w-[380px] bg-emerald-300/40 dark:bg-emerald-700/40" />
@@ -50,7 +62,7 @@ export default function Hero() {
           <div className="sun" />
         </div>
         {!reduce && <div ref={glowRef} className="cursor-glow hidden md:block" />}
-      </div>
+      </motion.div>
 
       <div className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6">
         <motion.p {...fadeUp(0)} className="mb-4 text-sm font-medium uppercase tracking-widest text-accent [word-spacing:0.5em]">
@@ -79,7 +91,7 @@ export default function Hero() {
           <Magnetic>
             <a
               href="#contact"
-              className="flex items-center rounded-full border border-line px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+              className="btn-fill flex items-center rounded-full border border-line px-6 py-3 text-sm font-medium transition-colors"
             >
               Contact Me
             </a>
