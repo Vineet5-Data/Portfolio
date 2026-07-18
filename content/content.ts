@@ -39,7 +39,7 @@ export const site = {
   title: "Data Scientist & ML Engineer",
   headline: "Building AI systems for autonomous navigation.",
   tagline:
-    "I'm building AI-driven map matching and path prediction as a personal research project, combining transformer and GNN architectures with reinforcement learning. Before that: bird song classifiers, cosmological inference, and recommendation systems in production.",
+    "I'm building AI-driven map matching and path prediction as a personal project, combining transformer and GNN architectures with reinforcement learning. Before that: bird song classifiers, cosmological inference, and recommendation systems in production.",
   email: "vineetdairashri5@gmail.com",
   github: "https://github.com/Vineet5-Data",
   linkedin: "https://www.linkedin.com/in/vineet-dairashri",
@@ -69,7 +69,7 @@ export const stats: Stat[] = [
 
 export const experience: ExperienceEntry[] = [
   {
-    role: "Independent Research — AI-Driven Map Matching & Path Prediction",
+    role: "AI-Driven Map Matching & Path Prediction",
     org: "Personal project",
     location: "",
     period: "2025 — present",

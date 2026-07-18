@@ -9,6 +9,7 @@ import Magnetic from "./Magnetic";
 export default function Hero() {
   const reduce = useReducedMotion();
   const glowRef = useRef<HTMLDivElement>(null);
+  const sunRef = useRef<HTMLDivElement>(null);
   const fadeUp = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -16,11 +17,21 @@ export default function Hero() {
   });
 
   function onMouseMove(e: React.MouseEvent<HTMLElement>) {
-    if (reduce || !glowRef.current) return;
+    if (reduce) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    glowRef.current.style.transform = `translate(${e.clientX - rect.left}px, ${
-      e.clientY - rect.top
-    }px)`;
+    if (glowRef.current) {
+      glowRef.current.style.transform = `translate(${
+        e.clientX - rect.left
+      }px, ${e.clientY - rect.top}px)`;
+    }
+    if (sunRef.current) {
+      // gentle parallax: sun drifts a few px toward the cursor
+      const dx = e.clientX - rect.left - rect.width / 2;
+      const dy = e.clientY - rect.top - rect.height / 2;
+      sunRef.current.style.transform = `translate(${dx * 0.03}px, ${
+        dy * 0.03
+      }px)`;
+    }
   }
 
   return (
@@ -35,11 +46,14 @@ export default function Hero() {
         <div className="orb orb-a left-[10%] top-[15%] h-[420px] w-[420px] bg-accent/60" />
         <div className="orb orb-b right-[5%] top-[30%] h-[380px] w-[380px] bg-emerald-300/40 dark:bg-emerald-700/40" />
         <div className="orb orb-c bottom-[5%] left-[35%] h-[340px] w-[340px] bg-teal-400/30" />
+        <div ref={sunRef} className="sun-wrap">
+          <div className="sun" />
+        </div>
         {!reduce && <div ref={glowRef} className="cursor-glow hidden md:block" />}
       </div>
 
       <div className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6">
-        <motion.p {...fadeUp(0)} className="mb-4 text-sm font-medium uppercase tracking-widest text-accent">
+        <motion.p {...fadeUp(0)} className="mb-4 text-sm font-medium uppercase tracking-widest text-accent [word-spacing:0.5em]">
           {site.name}
         </motion.p>
         <motion.h1
