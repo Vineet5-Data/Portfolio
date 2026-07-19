@@ -1,24 +1,14 @@
 "use client";
 
-import { ArrowUpRight, FileText, Plus } from "lucide-react";
+import { FileText, Github } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import type { Project } from "@/content/content";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const reduce = useReducedMotion();
-  if (project.placeholder) {
-    return (
-      <div className="flex min-h-[220px] flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-line p-6 text-muted">
-        <Plus size={22} />
-        <p className="text-sm font-medium">[+ Add Project]</p>
-        <p className="text-xs">{project.description}</p>
-      </div>
-    );
-  }
 
   return (
     <div
-      data-cursor="view"
       onMouseMove={(e) => {
         const el = e.currentTarget;
         const r = el.getBoundingClientRect();
@@ -42,22 +32,9 @@ export default function ProjectCard({ project }: { project: Project }) {
       }}
       className="spotlight group relative flex min-h-[220px] flex-col rounded-xl border border-line bg-card p-6 transition-[box-shadow,border-color] duration-300 hover:border-accent/50 hover:shadow-lg hover:shadow-black/10 dark:hover:shadow-black/40"
     >
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-base font-semibold tracking-tight sm:text-lg">
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            className="after:absolute after:inset-0 focus-visible:outline-none"
-          >
-            {project.title}
-          </a>
-        </h3>
-        <ArrowUpRight
-          size={18}
-          className="shrink-0 text-muted transition-colors group-hover:text-accent"
-        />
-      </div>
+      <h3 className="text-base font-semibold tracking-tight sm:text-lg">
+        {project.title}
+      </h3>
       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
         {project.description}
       </p>
@@ -71,16 +48,31 @@ export default function ProjectCard({ project }: { project: Project }) {
           </li>
         ))}
       </ul>
-      {project.report && (
-        <a
-          href={project.report}
-          target="_blank"
-          rel="noreferrer"
-          className="relative z-10 mt-4 inline-flex w-fit items-center gap-1.5 text-xs font-medium text-accent hover:underline"
-        >
-          <FileText size={13} />
-          Report (PDF)
-        </a>
+      {(project.link || project.report) && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-medium transition-colors hover:border-accent/50 hover:text-accent"
+            >
+              <Github size={13} />
+              Code
+            </a>
+          )}
+          {project.report && (
+            <a
+              href={project.report}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:border-accent hover:bg-accent/10"
+            >
+              <FileText size={13} />
+              Report (PDF)
+            </a>
+          )}
+        </div>
       )}
     </div>
   );

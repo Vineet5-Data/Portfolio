@@ -5,9 +5,10 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
+  // repo URL — leave "" until the real repo link exists; the Code button
+  // only renders when this is set, so no link ever points at the profile
   link?: string;
   report?: string;
-  placeholder?: boolean;
 };
 
 // static-export inlines this at build time; needed on every plain <a> asset href
@@ -100,14 +101,12 @@ export const projects: Project[] = [
     description:
       "A two-stage system for vehicles: first snapping noisy GPS traces onto the road graph, then predicting the road segments ahead. Transformer and GNN encoders over OSMnx road networks with latent-space reinforcement learning, trained label-free on raw fleet data (T-Drive, Porto Taxi, Grab-Posisi-L) and evaluated on road-level Hit@1.",
     tags: ["Transformers", "GNN", "RL", "OSMnx", "PyTorch"],
-    link: "https://github.com/Vineet5-Data",
   },
   {
     title: "Bird audio species classification",
     description:
       "Identifies bird species from field recordings — a ConvNeXT-based audio model reaching 0.880 AUC-ROC on multi-label soundscapes.",
     tags: ["ConvNeXT", "Audio ML", "PyTorch", "Kaggle"],
-    link: "https://github.com/Vineet5-Data",
     report: `${BASE}/reports/bird-classification-case-study.pdf`,
   },
   {
@@ -115,15 +114,13 @@ export const projects: Project[] = [
     description:
       "Estimates the parameters that shape the universe — H₀, Ωₘ, nₛ — from the galaxy power spectrum, using amortized neural posterior estimation with BayesFlow.",
     tags: ["SBI", "BayesFlow", "Bayesian Inference", "Deep Learning"],
-    link: "https://github.com/Vineet5-Data",
     report: `${BASE}/reports/sbi-cosmology-report.pdf`,
   },
   {
     title: "KD-tree recommendation system",
     description:
-      "My bachelor thesis: a KD-tree nearest-neighbour engine that recommends tiles from user preferences — Python service hosted on AWS, feeding an AR/VR showroom app through Firebase, with user feedback looped back into the suggestions.",
+      "My bachelor thesis: a KD-tree nearest-neighbour engine that recommends tiles from user preferences — Python service hosted on AWS, feeding an AR/VR showroom app through Firebase. Cut recommendation latency ~20% and lifted user engagement ~15% after deployment.",
     tags: ["Bachelor Thesis", "AWS", "Firebase", "AR/VR", "Python"],
-    link: "https://github.com/Vineet5-Data",
     report: `${BASE}/reports/kdtree-bachelor-thesis.pdf`,
   },
   {
@@ -131,13 +128,6 @@ export const projects: Project[] = [
     description:
       "Extends the causal tree algorithm with a MAD (median absolute deviation) split rule for robust treatment-effect estimation, with a C backend.",
     tags: ["Causal Inference", "C", "R", "Statistics"],
-    link: "https://github.com/Vineet5-Data",
-  },
-  {
-    title: "Add project",
-    description: "Next experiment goes here.",
-    tags: [],
-    placeholder: true,
   },
 ];
 

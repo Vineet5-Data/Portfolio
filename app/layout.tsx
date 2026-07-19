@@ -7,9 +7,28 @@ import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
+const SITE_URL = "https://vineet5-data.github.io/Portfolio";
+const OG_TITLE = `${site.name} — ${site.title}`;
+const OG_DESCRIPTION = `${site.headline} ${site.tagline}`;
+
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.title}`,
+  metadataBase: new URL(SITE_URL),
+  title: OG_TITLE,
   description: site.headline,
+  openGraph: {
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+    url: SITE_URL,
+    siteName: site.name,
+    type: "website",
+    images: [{ url: `${SITE_URL}/og.png`, width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+    images: [`${SITE_URL}/og.png`],
+  },
 };
 
 // Applies the stored theme before first paint; defaults to dark.
